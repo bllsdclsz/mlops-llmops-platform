@@ -24,7 +24,7 @@ One workflow per component. Path filters keep a change from running unrelated jo
 | --- | --- | --- |
 | `churn-ci` | `churn/`, `monitoring/`, `pyproject.toml`, `uv.lock` | lint, types, tests; image build (published to GHCR on `main`); Prometheus rules and Grafana dashboards |
 | `support-rag-ci` | `support-rag/`, `pyproject.toml`, `uv.lock` | lint, types, tests; retrieval and safety evaluation gates |
-| `platform-ci` | `platform/` | chart lint and schema checks, promotion rules, Terraform fmt/validate |
+| `platform-ci` | `platform/` | chart lint and schema checks, monitoring charts, SLO rule unit tests (promtool), promotion rules, Terraform fmt/validate |
 | `template-ci` | `templates/`, `platform/scripts/` | generates a service and runs its checks, chart validation and image build |
 | `docs` | `docs/`, `zensical.toml`, `pyproject.toml`, `uv.lock` | builds this site in strict mode; deploys it to GitHub Pages from `main` |
 

@@ -4,7 +4,10 @@ A runbook answers one question for the person on call: an alert fired, what now?
 
 | Service | Alerts | Runbook |
 | --- | --- | --- |
-| Churn API | `ChurnApiDown`, `ChurnApiHighLatency`, `ChurnApiHighErrorRate`, `ChurnPredictionShift` | [Churn API](churn-api.md) |
+| Every model-serving API on the cluster | `SLOAvailabilityFastBurn`, `SLOAvailabilitySlowBurn`, `SLOLatencyFastBurn`, `SLOLatencySlowBurn`, `ModelNotServed` | [SLO alerts](slo.md) |
+| Churn API in the Docker stack | `ChurnApiDown`, `ChurnApiHighLatency`, `ChurnApiHighErrorRate`, `ChurnPredictionShift` | [Churn API](churn-api.md) |
+
+The objectives, burn-rate windows and error budget policy behind the SLO alerts are in [SLOs](../slos.md).
 
 ## Common moves
 

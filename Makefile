@@ -1,4 +1,4 @@
-.PHONY: install lint test check docs-serve docs-build mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui promote-image new-service
+.PHONY: install lint test check docs-serve docs-build mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui grafana-ui prometheus-ui slo-report promote-image new-service
 
 export MLFLOW_DISABLE_AGENT_HINT := 1
 COMPOSE := sh scripts/compose.sh
@@ -109,6 +109,15 @@ argocd-ui:          ## Argo CD on http://localhost:8081 (user admin, password pr
 
 registry-ui:        ## shared MLflow registry on http://localhost:5001 (then: make promote with CHURN_MLFLOW_TRACKING_URI=http://localhost:5001)
 	$(KUBE) kubectl -n telcoai-registry port-forward svc/mlflow 5001:5000
+
+grafana-ui:         ## cluster Grafana on http://localhost:3001 (anonymous read-only), dashboard "Platform SLOs"
+	$(KUBE) kubectl -n telcoai-monitoring port-forward svc/grafana 3001:80
+
+prometheus-ui:      ## cluster Prometheus on http://localhost:9090 (alerts, rules); stop the Docker stack's Prometheus first
+	$(KUBE) kubectl -n telcoai-monitoring port-forward svc/prometheus-server 9090:80
+
+slo-report:         ## SLO report per env and service from the cluster Prometheus (make prometheus-ui first): make slo-report [WINDOW=7d]
+	uv run python platform/scripts/slo_report.py --window $(or $(WINDOW),30d)
 
 promote-image:      ## PR that deploys an image: make promote-image [SERVICE=churn-api] ENV=test [SHA=<commit>] | ENV=prod
 	sh platform/scripts/promote-image.sh $(or $(SERVICE),churn-api) $(ENV) $(SHA)

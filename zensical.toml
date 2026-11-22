@@ -37,7 +37,9 @@ nav = [
     "platform/service-template.md",
   ] },
   { "Operations" = [
+    "slos.md",
     "runbooks/index.md",
+    "runbooks/slo.md",
     "runbooks/churn-api.md",
   ] },
   { "Reference" = [

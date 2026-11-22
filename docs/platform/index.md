@@ -38,6 +38,18 @@ curl localhost:18001/health     # {"status":"ok","model_version":"1"}
 
 `make cluster-down` deletes everything.
 
+## SLOs and monitoring
+
+Prometheus scrapes every pod with `prometheus.io/*` annotations; one rule set turns the APIs' request metrics into SLIs for every service and environment. Objectives, burn-rate alerts, routing and the error budget policy: [SLOs](../slos.md). Runbook: [SLO alerts](../runbooks/slo.md).
+
+```bash
+make grafana-ui       # http://localhost:3001, dashboard "Platform SLOs"
+make prometheus-ui &  # http://localhost:9090 (alerts, rules)
+make slo-report       # markdown report per env and service
+```
+
+Dev and test get steady synthetic traffic (one known customer every 2 s), so their SLIs have data without real users; prod only counts real requests.
+
 !!! info "Isolated kubeconfig"
     Every command uses `platform/.kube/telcoai.yaml`. The cluster definition never touches `~/.kube/config` or the current context, so other clusters on the same machine are safe.
 
@@ -53,6 +65,9 @@ curl localhost:18001/health     # {"status":"ok","model_version":"1"}
 | `terraform/` | Namespaces (`ResourceQuota`, `LimitRange`), Argo CD, and the root application |
 | `charts/mlflow-registry/` | The shared MLflow registry |
 | `charts/churn-api/` | Churn API serving one alias, plus the optional dev bootstrap job |
+| `charts/slo/` | SLO recording rules, burn-rate alerts (with promtool unit tests) and the SLO dashboard |
+| `monitoring/` | Values for the upstream Prometheus/Alertmanager and Grafana charts |
+| `scripts/slo_report.py` | `make slo-report`: availability, latency and error budget per env and service |
 | `gitops/apps/` | What Argo CD deploys: the registry `Application` and the churn-api `ApplicationSet` (app of apps) |
 | `gitops/envs/<env>/` | Values per environment: the only files a deployment PR changes. A new folder is a new environment |
 
@@ -62,6 +77,7 @@ curl localhost:18001/health     # {"status":"ok","model_version":"1"}
 
 - **charts:** helm lint and kubeconform schema checks for every chart, environment and Argo CD app; charts must refuse to render without an image tag;
 - **promotions:** the rules in `check-promotions.sh` (immutable tags, image exists, prod only after test);
+- **slo-rules:** `promtool check rules` and `promtool test rules`, and the dashboards must be valid JSON; the monitoring charts must render with our values;
 - **terraform:** `fmt` and `validate`.
 
 Next: [Promotion](promotion.md) · [Design decisions](design.md) · [Service template](service-template.md)

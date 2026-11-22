@@ -58,6 +58,9 @@ Every workflow starts from `make` at the repository root. The targets call the `
 | `make platform-apply` | Terraform: namespaces, quotas, Argo CD, root app |
 | `make argocd-ui` | Argo CD on <http://localhost:8081> (user `admin`, password printed first) |
 | `make registry-ui` | Shared MLflow registry on <http://localhost:5001> |
+| `make grafana-ui` | Cluster Grafana on <http://localhost:3001> (anonymous read-only), dashboard *Platform SLOs* |
+| `make prometheus-ui` | Cluster Prometheus on <http://localhost:9090>; stop the Docker stack's Prometheus first (same port) |
+| `make slo-report [WINDOW=7d]` | SLO report per environment and service (needs `make prometheus-ui`) |
 | `make promote-image [SERVICE=churn-api] ENV=test [SHA=<commit>]` | Open the PR that deploys an image (then `ENV=prod`) |
 | `make new-service NAME=<name>` | Scaffold a model service wired into the platform |
 

@@ -100,6 +100,6 @@ Argo CD then deploys the shared model registry and the three environments from t
 
 ## Local environment notes
 
-- **Ports:** 5000 (MLflow), 6379 (Redis), 6566 (Feast), 8000 (churn API), 8100 (assistant API), 9090 (Prometheus), 3000 (Grafana); k3d: 6550 (Kubernetes API), 8080/8443 (ingress), 8081 (Argo CD UI), 5001 (registry port-forward). On macOS, AirPlay Receiver can hold port 5000; turn it off in System Settings → General → AirDrop & Handoff, or change the MLflow port.
+- **Ports:** 5000 (MLflow), 6379 (Redis), 6566 (Feast), 8000 (churn API), 8100 (assistant API), 9090 (Prometheus), 3000 (Grafana); k3d: 6550 (Kubernetes API), 8080/8443 (ingress), 8081 (Argo CD UI), 5001 (registry), 3001 (cluster Grafana) and 9090 (cluster Prometheus, the same port as the Docker stack's) as port-forwards. On macOS, AirPlay Receiver can hold port 5000; turn it off in System Settings → General → AirDrop & Handoff, or change the MLflow port.
 - **Docker:** the scripts use the `docker` CLI directly. Only on Windows, when the Docker pipe is unavailable, `scripts/compose.sh` and `platform/scripts/k3d.sh` fall back to running the commands inside the Rancher Desktop VM with `rdctl shell`.
 - **Kubernetes:** every command uses `platform/.kube/telcoai.yaml`; the current kubectl context is never changed, so other clusters on the machine are not touched.
