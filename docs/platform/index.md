@@ -17,7 +17,7 @@ flowchart TD
 
 ## Run it
 
-Needs k3d, Terraform, Helm and kubectl (`scoop install k3d terraform helm kubectl`) and a Docker engine (Rancher Desktop works).
+Needs k3d, Terraform, Helm and kubectl and a Docker engine; see [Get started](../getting-started.md#requirements) for macOS and Windows install commands. Tested on Windows 11 with Rancher Desktop. On Apple silicon, read [the image note](../getting-started.md#kubernetes-platform) first.
 
 ```bash
 make cluster-up       # k3d cluster + platform/.kube/telcoai.yaml

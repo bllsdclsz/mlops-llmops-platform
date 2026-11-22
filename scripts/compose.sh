@@ -8,7 +8,7 @@ if docker info >/dev/null 2>&1; then
     exec docker compose "$@"
 fi
 
-command -v rdctl >/dev/null 2>&1 || { echo "Docker daemon unreachable and rdctl not found" >&2; exit 1; }
+command -v rdctl >/dev/null 2>&1 || { echo "Docker daemon unreachable: start your Docker engine" >&2; exit 1; }
 
 project_dir=$(cd "$(dirname "$0")/.." && pwd)
 # /c/Users/... or C:/Users/... -> /mnt/c/Users/... (the Windows drive as mounted in the VM)

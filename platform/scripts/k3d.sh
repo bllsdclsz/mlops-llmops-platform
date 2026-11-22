@@ -11,7 +11,14 @@ repo_dir=$(cd "$(dirname "$0")/../.." && pwd)
 if docker info >/dev/null 2>&1 && command -v k3d >/dev/null 2>&1; then
     cd "$repo_dir" && exec k3d "$@"
 fi
-command -v rdctl >/dev/null 2>&1 || { echo "Docker unreachable and rdctl not found" >&2; exit 1; }
+if ! command -v rdctl >/dev/null 2>&1; then
+    if docker info >/dev/null 2>&1; then
+        echo "k3d not found: install it (macOS: brew install k3d, Windows: scoop install k3d)" >&2
+    else
+        echo "Docker daemon unreachable: start your Docker engine" >&2
+    fi
+    exit 1
+fi
 
 # Host path (Git Bash) -> the same path as mounted in the VM: /c/Users/... -> /mnt/c/Users/...
 to_vm() { printf '%s' "$1" | sed -E 's#^/?([A-Za-z]):?/#/mnt/\L\1/#'; }
