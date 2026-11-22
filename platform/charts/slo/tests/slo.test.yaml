@@ -24,7 +24,7 @@ tests:
               }
             exp_annotations:
               summary: "churn-api (prod): 10% of requests fail, burning the 30-day error budget 14x too fast"
-              runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#sloavailabilityfastburn
+              runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#sloavailabilityfastburn
 
   # 0.1% errors is inside the budget: no availability alert at all.
   - interval: 1m
@@ -59,7 +59,7 @@ tests:
               }
             exp_annotations:
               summary: "fraud-score (test): 100% of requests slower than 300 ms"
-              runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#slolatencyfastburn
+              runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#slolatencyfastburn
 
   # A pod that is up without a model fires after 10 minutes; one serving a model never does.
   - interval: 1m
@@ -84,4 +84,4 @@ tests:
               }
             exp_annotations:
               summary: "churn-api-a (prod) is up but serves no model"
-              runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#modelnotserved
+              runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#modelnotserved

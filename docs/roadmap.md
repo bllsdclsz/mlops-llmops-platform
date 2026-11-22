@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-09-29.
+Status as of 2026-11-22.
 
 ## Project 1: `churn/` (Churn prediction MLOps pipeline)
 
@@ -53,10 +53,8 @@ Status as of 2026-09-29.
 | SLOs for every API and env (availability 99.5%, latency 99% < 300 ms), multi-window burn-rate alerts with promtool unit tests, alert routing, SLO dashboard, `make slo-report`, runbook, error budget policy | Done | `docs/slos.md`, `platform/charts/slo/` |
 | Game day: break a model on purpose, detect it with the SLO alerts, roll back, write the postmortem | Next | `docs/postmortems/` |
 | Optional one-weekend Azure run                                                                         | Planned |                                                               |
+| Documentation site: Zensical, built in strict mode in CI, published to GitHub Pages                    | Done    | `docs/`, `zensical.toml`, `.github/workflows/docs.yml`        |
 
 ## Local environment notes
 
-- **Docker:** runs on Rancher Desktop, shared with another project. `scripts/compose.sh` falls back to `rdctl shell` when the Windows Docker pipe is unavailable.
-- **Ports used:** 5000 (MLflow), 6379 (Redis), 6566 (Feast), 8000 (API), 9090 (Prometheus), 3000 (Grafana); k3d: 6550 (Kubernetes API), 8080/8443 (ingress), 8081 (Argo CD UI port-forward).
-- **Kubernetes:** k3d runs inside the Rancher Desktop VM when the Windows Docker pipe is unavailable (`platform/scripts/k3d.sh`). All commands use `platform/.kube/telcoai.yaml`; the current kubectl context is never changed.
-- **Resuming after a restart:** `make up data train promote features serve-docker`. Volumes keep MLflow runs and the registry, so `train promote` is only needed on a fresh volume.
+Ports, Docker on Windows and the isolated kubeconfig: see [Get started](getting-started.md#local-environment-notes).

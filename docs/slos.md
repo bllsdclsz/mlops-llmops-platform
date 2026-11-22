@@ -53,6 +53,6 @@ The budget is a shared decision tool, not a punishment: if it is never spent, th
 
 ## Where to look
 
-- **Dashboard:** `make grafana-ui` → http://localhost:3001, "TelcoAI SLOs" (per environment and service: availability, budget left, latency SLI, model served, burn rate).
+- **Dashboard:** `make grafana-ui` → http://localhost:3001, "Platform SLOs" (per environment and service: availability, budget left, latency SLI, model served, burn rate).
 - **Report:** `make prometheus-ui &` then `make slo-report` (or `WINDOW=7d`): a markdown table per environment and service, plus the alerts firing now.
 - **Runbooks:** [runbooks/slo.md](runbooks/slo.md).

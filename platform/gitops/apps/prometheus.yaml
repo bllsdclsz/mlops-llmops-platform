@@ -15,7 +15,7 @@ spec:
       helm:
         releaseName: prometheus
         valueFiles: [$values/platform/monitoring/prometheus-values.yaml]
-    - repoURL: https://github.com/bllsdclsz/telcoai-platform.git
+    - repoURL: https://github.com/bllsdclsz/mlops-llmops-platform.git
       targetRevision: main
       ref: values
   destination:

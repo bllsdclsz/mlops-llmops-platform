@@ -1,0 +1,115 @@
+[project]
+site_name = "MLOps & LLMOps Platform"
+site_description = "Classic ML and GenAI models from experimentation to governed production: churn MLOps pipeline, multilingual RAG assistant, Kubernetes platform with GitOps."
+site_author = "Bilal S. Cilesiz"
+site_url = "https://bllsdclsz.github.io/mlops-llmops-platform/"
+repo_url = "https://github.com/bllsdclsz/mlops-llmops-platform"
+repo_name = "bllsdclsz/mlops-llmops-platform"
+edit_uri = "edit/main/docs/"
+docs_dir = "docs"
+site_dir = "site"
+copyright = "Portfolio project. The telecom operator and its help center are fictional."
+
+nav = [
+  { "Home" = "index.md" },
+  { "Get started" = [
+    "getting-started.md",
+    "architecture.md",
+  ] },
+  { "Churn prediction" = [
+    "churn/index.md",
+    "churn/feature-store.md",
+    "churn/governance.md",
+    "churn/monitoring.md",
+  ] },
+  { "Support assistant" = [
+    "support-rag/index.md",
+    "support-rag/generation.md",
+    "support-rag/guardrails.md",
+    "support-rag/actions.md",
+    "support-rag/tracing.md",
+    "support-rag/evaluation.md",
+  ] },
+  { "Platform" = [
+    "platform/index.md",
+    "platform/promotion.md",
+    "platform/design.md",
+    "platform/service-template.md",
+  ] },
+  { "Operations" = [
+    "slos.md",
+    "runbooks/index.md",
+    "runbooks/slo.md",
+    "runbooks/churn-api.md",
+  ] },
+  { "Reference" = [
+    "reference/commands.md",
+    "reference/configuration.md",
+    "versions.md",
+  ] },
+  { "Project" = [
+    "roadmap.md",
+    "development.md",
+  ] },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "content.code.annotate",
+  "content.code.copy",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+toc.permalink = true
+pymdownx.betterem = {}
+pymdownx.details = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.mark = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true

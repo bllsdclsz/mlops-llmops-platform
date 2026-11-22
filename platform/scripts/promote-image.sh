@@ -30,7 +30,8 @@ start=$(git rev-parse --abbrev-ref HEAD)
 branch=promote-$service-$env-$short
 git switch -q -c "$branch" origin/main
 if [ -f "$values" ]; then
-  sed -i "s/^  tag: .*/  tag: $tag/" "$values"
+  # No `sed -i`: GNU and BSD (macOS) sed disagree on its syntax.
+  sed "s/^  tag: .*/  tag: $tag/" "$values" > "$values.tmp" && mv "$values.tmp" "$values"
 else
   alias=$([ "$env" = test ] && echo staging || echo prod)
   printf '# Pinned image, changed only by promotion PRs (make promote-image). Serves @%s.\nimage:\n  tag: %s\n\napi:\n  servingAlias: %s\n' \

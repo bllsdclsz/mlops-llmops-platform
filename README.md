@@ -1,13 +1,15 @@
-# TelcoAI Platform
+# MLOps & LLMOps Platform
 
-An end-to-end ML and GenAI platform for a telecom operator: it covers taking models from experimentation to production, with the engineering standards a central ML platform team would provide to product teams.
+**Documentation: [bllsdclsz.github.io/mlops-llmops-platform](https://bllsdclsz.github.io/mlops-llmops-platform/)**
+
+An end-to-end MLOps and LLMOps platform: it takes classic ML and GenAI models from experimentation to governed production, with the engineering standards a central ML platform team provides to product teams. The example use cases come from a telecom operator: customer churn prediction and a multilingual support assistant.
 
 | Component                      | What it shows                                                                                                                                                                             | Status      |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [`churn/`](churn/)             | Churn prediction: validated data, reproducible training, MLflow registry with dev→staging→prod aliases, quality gate, model cards, FastAPI serving, Feast, drift-triggered retraining, CI | Done        |
-| [`support-rag/`](support-rag/) | Multilingual (DE/FR/IT/EN) customer-support RAG assistant: cited answers from a local LLM, guardrails, evaluation gates, tracing and audit log, human approval for actions                | Done        |
-| [`platform/`](platform/) | Local Kubernetes (k3d), Terraform, Argo CD GitOps: dev/test/prod with budgets, one shared model registry, image promotion by PR with CI-enforced rules, APIs that follow their model alias | In progress |
-| [`templates/ml-service/`](templates/ml-service/) | `make new-service NAME=…`: a model service already wired into the platform (API, tests, image, CI, Helm chart, Argo CD app, model card), tested in CI | Done |
+| [`churn/`](https://bllsdclsz.github.io/mlops-llmops-platform/churn/)             | Churn prediction: validated data, reproducible training, MLflow registry with dev→staging→prod aliases, quality gate, model cards, FastAPI serving, Feast, drift-triggered retraining, CI | Done        |
+| [`support-rag/`](https://bllsdclsz.github.io/mlops-llmops-platform/support-rag/) | Multilingual (DE/FR/IT/EN) customer-support RAG assistant: cited answers from a local LLM, guardrails, evaluation gates, tracing and audit log, human approval for actions                | Done        |
+| [`platform/`](https://bllsdclsz.github.io/mlops-llmops-platform/platform/) | Local Kubernetes (k3d), Terraform, Argo CD GitOps: dev/test/prod with budgets, one shared model registry, image promotion by PR with CI-enforced rules, APIs that follow their model alias | In progress |
+| [`templates/ml-service/`](https://bllsdclsz.github.io/mlops-llmops-platform/platform/service-template/) | `make new-service NAME=…`: a model service already wired into the platform (API, tests, image, CI, Helm chart, Argo CD app, model card), tested in CI | Done |
 
 ## Quick start
 
@@ -30,7 +32,7 @@ make serve-docker
 make demo-drift       # simulated drift -> automatic retrain to staging
 ```
 
-On Kubernetes, deployed by Argo CD from this repository ([platform/README.md](platform/README.md)):
+On Kubernetes, deployed by Argo CD from this repository ([Platform docs](https://bllsdclsz.github.io/mlops-llmops-platform/platform/)):
 
 ```bash
 make cluster-up platform-apply   # k3d cluster, namespaces with budgets, Argo CD; dev/test/prod sync themselves
@@ -45,4 +47,4 @@ make argocd-ui                   # http://localhost:8081
 - **Governance:** every registered version ships with a generated model card (intended use, data lineage, per-group performance, fairness gaps, blind spots). Promotion to prod needs a named approver and an explicit fairness acknowledgement when the card flags one; both are recorded on the version.
 - **CI on every change:** ruff, mypy, pytest, then a container build.
 
-Progress and next steps: [docs/roadmap.md](docs/roadmap.md). Tool versions: [docs/versions.md](docs/versions.md). Runbooks: [docs/runbooks/](docs/runbooks/).
+More in the [documentation](https://bllsdclsz.github.io/mlops-llmops-platform/): [architecture](https://bllsdclsz.github.io/mlops-llmops-platform/architecture/), [commands](https://bllsdclsz.github.io/mlops-llmops-platform/reference/commands/), [configuration](https://bllsdclsz.github.io/mlops-llmops-platform/reference/configuration/), [runbooks](https://bllsdclsz.github.io/mlops-llmops-platform/runbooks/), [roadmap](https://bllsdclsz.github.io/mlops-llmops-platform/roadmap/) and [tool versions](https://bllsdclsz.github.io/mlops-llmops-platform/versions/). The sources are in [`docs/`](docs/); `make docs-serve` previews them locally.

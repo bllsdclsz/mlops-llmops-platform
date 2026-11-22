@@ -24,7 +24,7 @@ dashboardProviders:
     apiVersion: 1
     providers:
       - name: slo
-        folder: TelcoAI
+        folder: Platform
         type: file
         disableDeletion: true
         editable: false

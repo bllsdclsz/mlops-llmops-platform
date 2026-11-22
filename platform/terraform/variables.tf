@@ -40,7 +40,7 @@ variable "argocd_apps_chart_version" {
 variable "gitops_repo_url" {
   description = "Git repository Argo CD watches."
   type        = string
-  default     = "https://github.com/bllsdclsz/telcoai-platform.git"
+  default     = "https://github.com/bllsdclsz/mlops-llmops-platform.git"
 }
 
 variable "gitops_revision" {

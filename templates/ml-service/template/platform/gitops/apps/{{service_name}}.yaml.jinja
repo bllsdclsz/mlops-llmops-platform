@@ -10,7 +10,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/{{ github_owner }}/telcoai-platform.git
+        repoURL: https://github.com/{{ github_owner }}/mlops-llmops-platform.git
         revision: main
         files:
           - path: platform/gitops/envs/*/{{ service_name }}.yaml
@@ -21,7 +21,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/{{ github_owner }}/telcoai-platform.git
+        repoURL: https://github.com/{{ github_owner }}/mlops-llmops-platform.git
         targetRevision: main
         path: platform/charts/{{ service_name }}
         helm:

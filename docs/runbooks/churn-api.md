@@ -1,7 +1,7 @@
 # Runbook: Churn API
 
 Service: `churn-api` (FastAPI, serves `models:/telco-churn@prod`)
-Dashboard: Grafana → TelcoAI → **Churn API** · Metrics: `http://<host>:8000/metrics` · Alert rules: `monitoring/prometheus/rules/churn-api.yml`
+Dashboard: Grafana → Platform → **Churn API** · Metrics: `http://<host>:8000/metrics` · Alert rules: `monitoring/prometheus/rules/churn-api.yml`
 
 | SLI                        | SLO      |
 | -------------------------- | -------- |

@@ -5,7 +5,7 @@ Every alert carries `env`, `service` and `namespace` labels. Objectives and the 
 First look, for any of them:
 
 ```bash
-make grafana-ui        # "TelcoAI SLOs": pick env and service
+make grafana-ui        # "Platform SLOs": pick env and service
 make argocd-ui         # did a sync just happen?
 KUBECONFIG=platform/.kube/telcoai.yaml kubectl -n telcoai-<env> get pods
 KUBECONFIG=platform/.kube/telcoai.yaml kubectl -n telcoai-<env> logs deploy/<service> --since=30m
@@ -47,5 +47,5 @@ Same diagnosis as above, during working hours. Often a subset of inputs that fai
 **Meaning:** the API pod has been up for 10 minutes without a model. Readiness keeps traffic away, so callers get no answer from this environment.
 
 1. Which alias does the env serve? dev → `@dev`, test → `@staging`, prod → `@prod`.
-2. `make registry-ui` and check the aliases of the model. Alias missing → someone has to promote a model (prod: a named approver, see `platform/README.md`).
+2. `make registry-ui` and check the aliases of the model. Alias missing → someone has to promote a model (prod: a named approver, see [Promotion](../platform/promotion.md#model-track)).
 3. Alias set but not loading → pod logs show `model check for @… failed`: registry unreachable (check `telcoai-registry`), or the model can't be loaded by this image (a dependency missing from the image).

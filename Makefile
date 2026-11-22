@@ -1,4 +1,4 @@
-.PHONY: install lint test check mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui promote-image new-service
+.PHONY: install lint test check docs-serve docs-build mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui grafana-ui prometheus-ui slo-report promote-image new-service
 
 export MLFLOW_DISABLE_AGENT_HINT := 1
 COMPOSE := sh scripts/compose.sh
@@ -17,6 +17,12 @@ test:
 	uv run pytest -p no:warnings
 
 check: lint test    ## everything CI runs
+
+docs-serve:         ## documentation site with live reload on http://127.0.0.1:8200
+	uv run --only-group docs zensical serve --dev-addr 127.0.0.1:8200
+
+docs-build:         ## build the documentation site into site/ (what the docs workflow runs)
+	uv run --only-group docs zensical build --clean --strict
 
 mlflow:             ## local MLflow server without Docker (http://127.0.0.1:5000)
 	uv run mlflow server --host 127.0.0.1 --port 5000 --backend-store-uri sqlite:///mlflow.db --artifacts-destination ./mlartifacts
@@ -103,6 +109,15 @@ argocd-ui:          ## Argo CD on http://localhost:8081 (user admin, password pr
 
 registry-ui:        ## shared MLflow registry on http://localhost:5001 (then: make promote with CHURN_MLFLOW_TRACKING_URI=http://localhost:5001)
 	$(KUBE) kubectl -n telcoai-registry port-forward svc/mlflow 5001:5000
+
+grafana-ui:         ## cluster Grafana on http://localhost:3001 (anonymous read-only), dashboard "Platform SLOs"
+	$(KUBE) kubectl -n telcoai-monitoring port-forward svc/grafana 3001:80
+
+prometheus-ui:      ## cluster Prometheus on http://localhost:9090 (alerts, rules); stop the Docker stack's Prometheus first
+	$(KUBE) kubectl -n telcoai-monitoring port-forward svc/prometheus-server 9090:80
+
+slo-report:         ## SLO report per env and service from the cluster Prometheus (make prometheus-ui first): make slo-report [WINDOW=7d]
+	uv run python platform/scripts/slo_report.py --window $(or $(WINDOW),30d)
 
 promote-image:      ## PR that deploys an image: make promote-image [SERVICE=churn-api] ENV=test [SHA=<commit>] | ENV=prod
 	sh platform/scripts/promote-image.sh $(or $(SERVICE),churn-api) $(ENV) $(SHA)

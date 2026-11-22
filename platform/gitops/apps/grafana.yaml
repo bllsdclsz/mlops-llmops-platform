@@ -13,7 +13,7 @@ spec:
       helm:
         releaseName: grafana
         valueFiles: [$values/platform/monitoring/grafana-values.yaml]
-    - repoURL: https://github.com/bllsdclsz/telcoai-platform.git
+    - repoURL: https://github.com/bllsdclsz/mlops-llmops-platform.git
       targetRevision: main
       ref: values
   destination:

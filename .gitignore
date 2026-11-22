@@ -14,3 +14,7 @@ data/feast/
 data/qdrant/
 data/*.db
 platform/.kube/
+
+# Documentation site (make docs-build)
+site/
+.cache/

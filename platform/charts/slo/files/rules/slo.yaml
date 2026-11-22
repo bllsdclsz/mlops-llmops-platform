@@ -118,7 +118,7 @@ groups:
         labels: { severity: critical, slo: availability }
         annotations:
           summary: "{{ $labels.service }} ({{ $labels.env }}): {{ $value | humanizePercentage }} of requests fail, burning the 30-day error budget 14x too fast"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#sloavailabilityfastburn
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#sloavailabilityfastburn
 
       - alert: SLOAvailabilitySlowBurn
         expr: slo:error_ratio:rate6h > (6 * 0.005) and slo:error_ratio:rate30m > (6 * 0.005)
@@ -126,7 +126,7 @@ groups:
         labels: { severity: warning, slo: availability }
         annotations:
           summary: "{{ $labels.service }} ({{ $labels.env }}): {{ $value | humanizePercentage }} of requests fail, burning the error budget 6x too fast"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#sloavailabilityslowburn
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#sloavailabilityslowburn
 
       - alert: SLOLatencyFastBurn
         expr: slo:slow_ratio:rate1h > (14.4 * 0.01) and slo:slow_ratio:rate5m > (14.4 * 0.01)
@@ -134,7 +134,7 @@ groups:
         labels: { severity: critical, slo: latency }
         annotations:
           summary: "{{ $labels.service }} ({{ $labels.env }}): {{ $value | humanizePercentage }} of requests slower than 300 ms"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#slolatencyfastburn
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#slolatencyfastburn
 
       - alert: SLOLatencySlowBurn
         expr: slo:slow_ratio:rate6h > (6 * 0.01) and slo:slow_ratio:rate30m > (6 * 0.01)
@@ -142,7 +142,7 @@ groups:
         labels: { severity: warning, slo: latency }
         annotations:
           summary: "{{ $labels.service }} ({{ $labels.env }}): {{ $value | humanizePercentage }} of requests slower than 300 ms"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#slolatencyslowburn
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#slolatencyslowburn
 
       # ML-specific: the pod runs and answers /livez, but has no model to serve (the alias is
       # unset, or loading failed). Readiness keeps traffic away; a person has to act.
@@ -154,4 +154,4 @@ groups:
         labels: { severity: warning }
         annotations:
           summary: "{{ $labels.pod }} ({{ $labels.env }}) is up but serves no model"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/slo.md#modelnotserved
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/slo.md#modelnotserved
