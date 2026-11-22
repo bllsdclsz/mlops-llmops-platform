@@ -1,4 +1,4 @@
-.PHONY: install lint test check mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui promote-image new-service
+.PHONY: install lint test check docs-serve docs-build mlflow download data train features pipeline promote serve monitor simulate rag-ingest rag-eval rag-eval-gen demo-drift up serve-docker ps down cluster-up cluster-down kubeconfig platform-apply argocd-ui registry-ui promote-image new-service
 
 export MLFLOW_DISABLE_AGENT_HINT := 1
 COMPOSE := sh scripts/compose.sh
@@ -17,6 +17,12 @@ test:
 	uv run pytest -p no:warnings
 
 check: lint test    ## everything CI runs
+
+docs-serve:         ## documentation site with live reload on http://127.0.0.1:8200
+	uv run --only-group docs zensical serve --dev-addr 127.0.0.1:8200
+
+docs-build:         ## build the documentation site into site/ (what the docs workflow runs)
+	uv run --only-group docs zensical build --clean --strict
 
 mlflow:             ## local MLflow server without Docker (http://127.0.0.1:5000)
 	uv run mlflow server --host 127.0.0.1 --port 5000 --backend-store-uri sqlite:///mlflow.db --artifacts-destination ./mlartifacts

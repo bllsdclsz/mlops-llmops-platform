@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     qdrant_path: Path = Path("data/qdrant")
     collection: str = "support_articles"
 
-    # Chosen by benchmark with the retrieval evaluation (see support-rag/README.md).
+    # Chosen by benchmark with the retrieval evaluation (see docs/support-rag/evaluation.md).
     dense_model: str = "intfloat/multilingual-e5-large"
     # Hybrid BM25 lowered hit@1 for e5-large in the benchmark (English stemming on DE/FR/IT),
     # so the default is dense-only; set RAG_SPARSE_MODEL=Qdrant/bm25 to enable hybrid search.
@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     # Generation. Any LiteLLM model string works, e.g. "azure/<deployment>" with its API key.
     prompts_dir: Path = PACKAGE_DIR / "prompts"
     prompt_version: int | None = None  # None -> latest version
-    # Chosen by comparison (support-rag/README.md): newest model with clean, correct answers.
+    # Chosen by comparison (docs/support-rag/generation.md): newest model, clean and correct.
     llm_model: str = "ollama_chat/granite4.2:8b"
     llm_api_base: str | None = "http://127.0.0.1:11434"
     temperature: float = 0.0
@@ -43,7 +43,7 @@ class Settings(BaseSettings):
     # First, cheap scope filter: below this best-match score the question is answered with the
     # fallback, without an LLM call. Set just under the lowest in-scope score (0.788 on the golden
     # set), so no real question is refused; it stops 12/24 off-topic questions. The rest are left
-    # to the model's NO_ANSWER instruction (second layer). See support-rag/README.md.
+    # to the model's NO_ANSWER instruction (second layer). See docs/support-rag/generation.md.
     min_retrieval_score: float = 0.78
 
     # Human-in-the-loop actions: pending requests the assistant proposes; None disables actions.

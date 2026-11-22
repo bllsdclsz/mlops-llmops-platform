@@ -7,7 +7,7 @@
   faithful / relevant, pass or fail per answer.
 `rag calibrate-judge` scores the judge and the style check on eval/judge_calibration.yaml
 (known-good and known-bad answers). Calibration moved "clean" out of the judge: qwen2.5 7B was
-right on only 71% of style verdicts (see support-rag/README.md). Generations run first and
+right on only 71% of style verdicts (see docs/support-rag/evaluation.md). Generations run first and
 judgments after, so a small GPU never has to swap two models per question.
 """
 
