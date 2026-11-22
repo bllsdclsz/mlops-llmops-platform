@@ -17,7 +17,7 @@ groups:
         labels: { severity: critical }
         annotations:
           summary: Churn API is not responding to scrapes
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/churn-api.md#churnapidown
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/churn-api.md#churnapidown
 
       - alert: ChurnApiHighLatency
         expr: churn:predict_latency_seconds:p95_5m > 0.3
@@ -25,7 +25,7 @@ groups:
         labels: { severity: warning }
         annotations:
           summary: "p95 /predict latency {{ $value | humanizeDuration }} is above the 300 ms SLO"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/churn-api.md#churnapihighlatency
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/churn-api.md#churnapihighlatency
 
       - alert: ChurnApiHighErrorRate
         expr: churn:predict_error_ratio:5m > 0.01
@@ -33,7 +33,7 @@ groups:
         labels: { severity: critical }
         annotations:
           summary: "{{ $value | humanizePercentage }} of /predict requests fail (SLO < 1%)"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/churn-api.md#churnapihigherrorrate
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/churn-api.md#churnapihigherrorrate
 
       # Real-time proxy for drift: the model predicts far more churners than the training base
       # rate (26.5%). The Evidently drift flow gives the per-feature diagnosis.
@@ -43,4 +43,4 @@ groups:
         labels: { severity: warning }
         annotations:
           summary: "{{ $value | humanizePercentage }} of scored customers predicted to churn (base rate 26.5%)"
-          runbook_url: https://github.com/bllsdclsz/telcoai-platform/blob/main/docs/runbooks/churn-api.md#churnpredictionshift
+          runbook_url: https://github.com/bllsdclsz/mlops-llmops-platform/blob/main/docs/runbooks/churn-api.md#churnpredictionshift

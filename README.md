@@ -1,6 +1,6 @@
-# TelcoAI Platform
+# MLOps & LLMOps Platform
 
-An end-to-end ML and GenAI platform for a telecom operator: it covers taking models from experimentation to production, with the engineering standards a central ML platform team would provide to product teams.
+An end-to-end MLOps and LLMOps platform: it takes classic ML and GenAI models from experimentation to governed production, with the engineering standards a central ML platform team provides to product teams. The example use cases come from a telecom operator: customer churn prediction and a multilingual support assistant.
 
 | Component                      | What it shows                                                                                                                                                                             | Status      |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |

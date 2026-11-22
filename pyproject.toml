@@ -1,7 +1,7 @@
 [project]
-name = "telcoai-platform"
+name = "mlops-llmops-platform"
 version = "0.1.0"
-description = "Portfolio ML/LLMOps platform: churn MLOps pipeline, multilingual RAG assistant, IaC/GitOps."
+description = "MLOps & LLMOps platform: churn MLOps pipeline, multilingual RAG assistant, IaC/GitOps."
 requires-python = ">=3.14,<3.15"
 dependencies = ["churn[pipeline]", "support-rag"]
 
